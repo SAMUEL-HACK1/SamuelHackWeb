@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CONSEJOS VIP | SAMUEL HACK</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --neon-green: #00ff7f;
+            --neon-blue: #00bfff;
+            --dark-bg: #000000;
+            --dark-card: rgba(10, 10, 10, 0.98);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+        body { background-color: var(--dark-bg); color: #fff; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+        
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; }
+
+        /* --- HANDLER ORIGINAL CLONADO --- */
+        .handler {
+            position: fixed; top: 0; width: 100%; height: 55px;
+            background: linear-gradient(180deg, rgba(0,255,127,0.15) 0%, rgba(0,0,0,0.95) 100%);
+            border-bottom: 1px solid rgba(0, 255, 127, 0.4);
+            z-index: 1000; display: flex; justify-content: space-between;
+            align-items: center; padding: 0 40px; backdrop-filter: blur(10px);
+        }
+        .handler-logo {
+            font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900;
+            letter-spacing: 4px; background: linear-gradient(to right, #fff, var(--neon-green));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .status-pill {
+            display: flex; align-items: center; gap: 10px; background: rgba(0, 0, 0, 0.6);
+            padding: 5px 15px; border-radius: 50px; border: 1px solid var(--neon-green);
+            font-family: 'Orbitron', sans-serif; font-size: 0.65rem; color: var(--neon-green);
+        }
+        .dot { height: 8px; width: 8px; background-color: var(--neon-green); border-radius: 50%; box-shadow: 0 0 12px var(--neon-green); animation: pulse 1.2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* --- PANEL DE ESTADÍSTICAS --- */
+        .user-stats-panel {
+            position: fixed; top: 55px; width: 100%; z-index: 999;
+            display: flex; justify-content: center; background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(0, 191, 255, 0.2); padding: 5px 0; backdrop-filter: blur(5px);
+        }
+        .stat-badge {
+            font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 15px; color: #fff;
+        }
+        .stat-value { color: var(--neon-blue); font-weight: 900; text-shadow: 0 0 5px var(--neon-blue); }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .main-content { position: relative; z-index: 10; width: 100%; max-width: 1100px; margin: 160px auto 100px; padding: 0 20px; }
+
+        .btn-back { display: inline-block; margin-bottom: 30px; text-decoration: none; font-family: 'Orbitron'; font-size: 0.7rem; color: var(--neon-blue); letter-spacing: 1px; transition: 0.3s; }
+        .btn-back:hover { text-shadow: 0 0 10px var(--neon-blue); }
+
+        .search-area { position: relative; margin-bottom: 50px; }
+        .search-bar { width: 100%; padding: 18px 18px 18px 60px; background: rgba(255,255,255,0.03); border: 1px solid rgba(0,255,127,0.2); color: #fff; font-size: 1.1rem; border-radius: 4px; transition: 0.3s; outline: none; font-family: 'Rajdhani'; }
+        .search-bar:focus { border-color: var(--neon-blue); box-shadow: 0 0 25px rgba(0, 191, 255, 0.15); }
+        .search-area i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--neon-green); font-size: 1.2rem; }
+
+        /* --- GRID DE CARDS --- */
+        .grid-tips { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        .tip-card {
+            background: var(--dark-card); border: 1px solid rgba(0, 255, 127, 0.2);
+            border-radius: 4px; overflow: hidden; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
+            animation: fadeInUp 0.5s ease backwards;
+        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .tip-card:hover { border-color: var(--neon-green); transform: translateY(-5px); box-shadow: 0 0 30px rgba(0, 255, 127, 0.2); }
+        .tip-img { width: 100%; height: 180px; object-fit: cover; filter: brightness(0.7); transition: 0.5s; }
+        .tip-card:hover .tip-img { filter: brightness(1); }
+        
+        .tip-body { padding: 25px; }
+        .tip-title { font-family: 'Orbitron'; font-size: 1.1rem; color: #fff; margin-bottom: 8px; letter-spacing: 1px; }
+        .tip-subtitle { font-family: 'Rajdhani'; font-size: 0.8rem; color: var(--neon-green); font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; }
+        .tip-preview { color: #666; font-size: 0.9rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* --- MODAL DE LECTURA --- */
+        #modal-tip { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.98); z-index: 10000; align-items: center; justify-content: center; 
+            backdrop-filter: blur(15px); padding: 20px;
+        }
+        .m-content { 
+            background: #050505; border: 1px solid var(--neon-green); width: 100%; max-width: 550px; 
+            border-radius: 4px; position: relative; 
+            transform: scale(0.8); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 50px rgba(0, 255, 127, 0.1);
+        }
+        #modal-tip.active .m-content { transform: scale(1); opacity: 1; }
+
+        /* Video en el Modal */
+        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; display: none; border-bottom: 1px solid var(--neon-green); }
+        .video-box iframe { width: 100%; height: 100%; border: none; }
+
+        .m-header-img { width: 100%; height: 230px; object-fit: cover; border-bottom: 1px solid var(--neon-green); }
+        .m-inner { padding: 35px; max-height: 60vh; overflow-y: auto; }
+        .m-inner::-webkit-scrollbar { width: 4px; }
+        .m-inner::-webkit-scrollbar-thumb { background: var(--neon-green); }
+
+        .m-title { font-family: 'Orbitron'; color: #fff; font-size: 1.4rem; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
+        .m-sub { font-family: 'Orbitron'; color: var(--neon-green); font-size: 0.7rem; margin-bottom: 25px; display: block; letter-spacing: 2px; border-left: 3px solid var(--neon-green); padding-left: 12px; }
+        
+        .m-text { color: #bbb; font-size: 1.05rem; line-height: 1.8; text-align: justify; font-family: 'Rajdhani'; white-space: pre-wrap; }
+
+        .btn-close-m { 
+            width: 100%; padding: 20px; background: #000; border: none; border-top: 1px solid #222; 
+            color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.8rem; font-weight: 900; 
+            cursor: pointer; letter-spacing: 3px; transition: 0.3s;
+        }
+        .btn-close-m:hover { background: var(--neon-green); color: #000; box-shadow: 0 -10px 20px rgba(0,255,127,0.2); }
+
+        #maint-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 20000; flex-direction: column; align-items: center; justify-content: center; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div id="particles-js"></div>
+
+    <div id="maint-overlay">
+        <h1 id="m-title" style="font-family:'Orbitron'; color:var(--neon-green); font-size: clamp(1.4rem, 5vw, 2.8rem); font-weight:900; text-transform:uppercase; margin-bottom:15px; text-shadow: 0 0 25px rgba(0, 255, 127, 0.5);">SISTEMA EN ACTUALIZACIÓN</h1>
+        <p style="color:#888; text-transform:uppercase; margin-bottom:50px;">Mejorando la base de datos de consejos</p>
+        <div style="font-family:'Orbitron'; font-size: 1.8rem; font-weight: 900; letter-spacing: 15px; color: #222;">®SAMUEL HACK</div>
+    </div>
+
+    <header class="handler">
+        <div class="handler-logo" id="h-logo-text">SAMUEL HACK</div>
+        <div class="status-pill">
+            <div class="dot"></div> ONLINE
+        </div>
+    </header>
+
+    <div class="user-stats-panel">
+        <div class="stat-badge">
+            <span>VISUALIZACIONES: <span class="stat-value" id="user-count">0</span></span>
+            <span style="color: rgba(255,255,255,0.2);">|</span>
+            <span>DATA_LOAD: <span class="stat-value">100%</span></span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <a href="index.html" class="btn-back"><i class="fas fa-chevron-left"></i> VOLVER AL MENÚ</a>
+        
+        <div class="search-area">
+            <i class="fas fa-search"></i>
+            <input type="text" id="bus" class="search-bar" placeholder="Buscar en la base de datos de inteligencia..." onkeyup="filtrar()">
+        </div>
+
+        <div class="grid-tips" id="grid">
+            <div class="tip-card item" onclick="leerConsejo('https://images7.alphacoders.com/102/1029272.jpg', 'MANEJO DE DATOS', 'NIVEL DE SEGURIDAD: ALTO', 'Esto es una card de ejemplo. Cuando subas contenido real desde tu base de datos, esta desaparecerá automáticamente.', '')">
+                <img src="https://images7.alphacoders.com/102/1029272.jpg" class="tip-img">
+                <div class="tip-body">
+                    <h2 class="tip-title">MANEJO DE DATOS</h2>
+                    <h3 class="tip-subtitle">NIVEL DE SEGURIDAD: ALTO</h3>
+                    <p class="tip-preview">Card de ejemplo para visualización inicial...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-tip">
+        <div class="m-content">
+            <div id="v-box" class="video-box">
+                <iframe id="v-player" src="" allowfullscreen></iframe>
+            </div>
+            <img id="m-img" src="" class="m-header-img">
+            <div class="m-inner">
+                <h2 id="m-tit" class="m-title"></h2>
+                <span id="m-sub" class="m-sub"></span>
+                <div id="m-body" class="m-text"></div>
+            </div>
+            <button class="btn-close-m" onclick="cerrar()">CERRAR ARTÍCULO</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDd2lMfzK96vABG9FVU7aPlbiRvTCFNNNg",
+            authDomain: "samuelhackweb.firebaseapp.com",
+            databaseURL: "https://samuelhackweb-default-rtdb.firebaseio.com",
+            projectId: "samuelhackweb",
+            storageBucket: "samuelhackweb.firebasestorage.app",
+            messagingSenderId: "398823531934",
+            appId: "1:398823531934:web:9a00eef74e8d69a04d628f"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        onValue(ref(db, 'Config/mantenimiento_activo'), (s) => { document.getElementById('maint-overlay').style.display = s.val() ? 'flex' : 'none'; });
+        onValue(ref(db, 'Stats/total_views'), (s) => { document.getElementById('user-count').innerText = s.val().toLocaleString(); });
+
+        // LÓGICA DE CARDS DESDE FIREBASE
+        onValue(ref(db, 'consejos_card'), (snap) => {
+            const grid = document.getElementById('grid');
+            const data = snap.val();
+            
+            if(data) {
+                grid.innerHTML = ""; // BORRA LAS CARDS DE EJEMPLO SI HAY DATOS REALES
+                Object.keys(data).reverse().forEach(id => {
+                    const i = data[id];
+                    grid.innerHTML += `
+                        <div class="tip-card item" onclick="leerConsejo('${i.foto}', '${i.titulo}', '${i.tag || 'ARTÍCULO PRIVADO'}', \`${i.texto}\`, '${i.video || ''}')">
+                            <img src="${i.foto}" class="tip-img">
+                            <div class="tip-body">
+                                <h2 class="tip-title">${i.titulo}</h2>
+                                <h3 class="tip-subtitle">${i.tag || 'ARTÍCULO PRIVADO'}</h3>
+                                <p class="tip-preview">${i.texto}</p>
+                            </div>
+                        </div>`;
+                });
+            }
+        });
+
+        window.leerConsejo = (img, tit, sub, texto, video) => {
+            document.getElementById('m-img').src = img;
+            document.getElementById('m-tit').innerText = tit;
+            document.getElementById('m-sub').innerText = sub;
+            document.getElementById('m-body').innerText = texto;
+            
+            const vBox = document.getElementById('v-box');
+            const vPlayer = document.getElementById('v-player');
+            const mImg = document.getElementById('m-img');
+
+            if(video && video !== "") {
+                let id = video.split('v=')[1] || video.split('/').pop();
+                vPlayer.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+                vBox.style.display = "block";
+                mImg.style.display = "none";
+            } else {
+                vPlayer.src = "";
+                vBox.style.display = "none";
+                mImg.style.display = "block";
+            }
+
+            const modal = document.getElementById('modal-tip');
+            modal.style.display = "flex";
+            setTimeout(() => { modal.classList.add('active'); }, 10);
+            document.body.style.overflow = "hidden";
+        };
+
+        window.cerrar = () => {
+            const modal = document.getElementById('modal-tip');
+            document.getElementById('v-player').src = "";
+            modal.classList.remove('active');
+            setTimeout(() => { modal.style.display = "none"; }, 400);
+            document.body.style.overflow = "auto";
+        };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 110 },
+                "color": { "value": ["#00ff7f", "#00bfff"] },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4 },
+                "size": { "value": 2.5 },
+                "line_linked": { "enable": true, "distance": 110, "color": "#00ff7f", "opacity": 0.15 },
+                "move": { "enable": true, "speed": 3.5 }
+            }
+        });
+
+        // SEGURIDAD
+        document.onkeydown = function(e) {
+            if(event.keyCode == 123) return false;
+            if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false;
+            if(e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83)) return false;
+        };
+
+        function filtrar() {
+            let v = document.getElementById('bus').value.toUpperCase();
+            let items = document.getElementsByClassName('item');
+            for(let i=0; i<items.length; i++) {
+                items[i].style.display = items[i].innerText.toUpperCase().includes(v) ? "" : "none";
+            }
+        }
+    </script>
+</body>
+</html>
