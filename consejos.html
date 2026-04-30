@@ -21,56 +21,37 @@
         
         #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; }
 
-        /* --- OVERLAY DE MANTENIMIENTO MEJORADO --- */
+        /* --- PANTALLA MANTENIMIENTO "ESTILO IMAGEN" --- */
         #maint-overlay { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: radial-gradient(circle, #050505 0%, #000 100%); 
-            z-index: 30000; flex-direction: column; align-items: center; justify-content: center; 
-            text-align: center; padding: 20px;
-        }
-        
-        .maint-box {
-            position: relative; padding: 40px; border: 1px solid var(--neon-green);
-            background: rgba(0, 255, 127, 0.02); overflow: hidden;
-            box-shadow: 0 0 50px rgba(0, 255, 127, 0.1); border-radius: 4px;
+            background: #000; z-index: 30000; flex-direction: column; 
+            align-items: center; justify-content: center; text-align: center; padding: 20px;
         }
 
-        .maint-box::before {
-            content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(transparent, rgba(0, 255, 127, 0.2), transparent);
-            animation: scan 3s linear infinite;
+        .maint-tit-clean {
+            font-family: 'Orbitron'; font-size: clamp(1.5rem, 8vw, 2.8rem);
+            color: var(--neon-green); font-weight: 900; text-transform: uppercase;
+            letter-spacing: 2px; text-shadow: 0 0 20px rgba(0, 255, 127, 0.4);
+            margin-bottom: 5px;
         }
 
-        @keyframes scan { 0% { top: -100%; } 100% { top: 100%; } }
-
-        .glitch-text {
-            font-family: 'Orbitron'; font-size: clamp(1.2rem, 6vw, 2.2rem); color: var(--neon-green);
-            font-weight: 900; text-transform: uppercase; margin-bottom: 10px;
-            text-shadow: 2px 2px #ff0000, -2px -2px #00bfff; animation: glitch 1s infinite;
+        .maint-sub-clean {
+            font-family: 'Rajdhani'; color: #666; text-transform: uppercase;
+            letter-spacing: 4px; font-size: 0.9rem; font-weight: 700; margin-bottom: 50px;
         }
 
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
+        .timer-giant {
+            font-family: 'Orbitron'; font-size: clamp(3rem, 15vw, 6rem);
+            color: #fff; font-weight: 900; letter-spacing: -2px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.2); margin-bottom: 60px;
         }
 
-        .maint-sub { color: #555; text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 30px; }
-        
-        .loader-bar {
-            width: 250px; height: 2px; background: rgba(255,255,255,0.1);
-            margin: 20px auto; position: relative; overflow: hidden;
+        .brand-footer {
+            font-family: 'Orbitron'; font-size: 1.2rem; color: #222;
+            font-weight: 900; letter-spacing: 12px; margin-top: 20px;
         }
-        .loader-progress {
-            position: absolute; height: 100%; width: 50%; background: var(--neon-green);
-            box-shadow: 0 0 15px var(--neon-green); animation: loading 2s ease-in-out infinite;
-        }
-        @keyframes loading { 0% { left: -50%; } 100% { left: 100%; } }
 
-        /* --- HANDLER ORIGINAL --- */
+        /* --- HEADER Y ESTRUCTURA --- */
         .handler {
             position: fixed; top: 0; width: 100%; height: 55px;
             background: linear-gradient(180deg, rgba(0,255,127,0.15) 0%, rgba(0,0,0,0.95) 100%);
@@ -78,90 +59,49 @@
             z-index: 1000; display: flex; justify-content: space-between;
             align-items: center; padding: 0 40px; backdrop-filter: blur(10px);
         }
-        .handler-logo {
-            font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900;
-            letter-spacing: 4px; background: linear-gradient(to right, #fff, var(--neon-green));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .status-pill {
-            display: flex; align-items: center; gap: 10px; background: rgba(0, 0, 0, 0.6);
-            padding: 5px 15px; border-radius: 50px; border: 1px solid var(--neon-green);
-            font-family: 'Orbitron', sans-serif; font-size: 0.65rem; color: var(--neon-green);
-        }
+        .handler-logo { font-family: 'Orbitron'; font-size: 1rem; font-weight: 900; letter-spacing: 4px; background: linear-gradient(to right, #fff, var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .status-pill { display: flex; align-items: center; gap: 10px; background: rgba(0, 0, 0, 0.6); padding: 5px 15px; border-radius: 50px; border: 1px solid var(--neon-green); font-family: 'Orbitron'; font-size: 0.65rem; color: var(--neon-green); }
         .dot { height: 8px; width: 8px; background-color: var(--neon-green); border-radius: 50%; box-shadow: 0 0 12px var(--neon-green); animation: pulse 1.2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        .user-stats-panel {
-            position: fixed; top: 55px; width: 100%; z-index: 999;
-            display: flex; justify-content: center; background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(0, 191, 255, 0.2); padding: 5px 0; backdrop-filter: blur(5px);
-        }
-        .stat-badge {
-            font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 1px;
-            display: flex; align-items: center; gap: 15px; color: #fff;
-        }
+        .user-stats-panel { position: fixed; top: 55px; width: 100%; z-index: 999; display: flex; justify-content: center; background: rgba(0, 0, 0, 0.4); border-bottom: 1px solid rgba(0, 191, 255, 0.2); padding: 5px 0; backdrop-filter: blur(5px); }
+        .stat-badge { font-family: 'Orbitron'; font-size: 0.6rem; letter-spacing: 1px; display: flex; align-items: center; gap: 15px; color: #fff; }
         .stat-value { color: var(--neon-blue); font-weight: 900; text-shadow: 0 0 5px var(--neon-blue); }
 
         .main-content { position: relative; z-index: 10; width: 100%; max-width: 1100px; margin: 160px auto 100px; padding: 0 20px; }
-
-        .btn-back { display: inline-block; margin-bottom: 30px; text-decoration: none; font-family: 'Orbitron'; font-size: 0.7rem; color: var(--neon-blue); letter-spacing: 1px; transition: 0.3s; }
-        .btn-back:hover { text-shadow: 0 0 10px var(--neon-blue); }
-
+        .btn-back { display: inline-block; margin-bottom: 30px; text-decoration: none; font-family: 'Orbitron'; font-size: 0.7rem; color: var(--neon-blue); letter-spacing: 1px; }
+        
         .search-area { position: relative; margin-bottom: 50px; }
-        .search-bar { width: 100%; padding: 18px 18px 18px 60px; background: rgba(255,255,255,0.03); border: 1px solid rgba(0,255,127,0.2); color: #fff; font-size: 1.1rem; border-radius: 4px; transition: 0.3s; outline: none; font-family: 'Rajdhani'; }
-        .search-bar:focus { border-color: var(--neon-blue); box-shadow: 0 0 25px rgba(0, 191, 255, 0.15); }
+        .search-bar { width: 100%; padding: 18px 18px 18px 60px; background: rgba(255,255,255,0.03); border: 1px solid rgba(0,255,127,0.2); color: #fff; font-size: 1.1rem; border-radius: 4px; outline: none; font-family: 'Rajdhani'; }
         .search-area i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--neon-green); font-size: 1.2rem; }
 
         .grid-tips { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-        .tip-card {
-            background: var(--dark-card); border: 1px solid rgba(0, 255, 127, 0.2);
-            border-radius: 4px; overflow: hidden; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
-            animation: fadeInUp 0.5s ease backwards;
-        }
+        .tip-card { background: var(--dark-card); border: 1px solid rgba(0, 255, 127, 0.2); border-radius: 4px; overflow: hidden; transition: 0.4s; cursor: pointer; animation: fadeInUp 0.5s ease backwards; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        .tip-card:hover { border-color: var(--neon-green); transform: translateY(-5px); box-shadow: 0 0 30px rgba(0, 255, 127, 0.2); }
-        .tip-img { width: 100%; height: 180px; object-fit: cover; filter: brightness(0.7); transition: 0.5s; }
-        .tip-card:hover .tip-img { filter: brightness(1); }
-        
+        .tip-img { width: 100%; height: 180px; object-fit: cover; filter: brightness(0.7); }
         .tip-body { padding: 25px; }
-        .tip-title { font-family: 'Orbitron'; font-size: 1.1rem; color: #fff; margin-bottom: 8px; letter-spacing: 1px; }
+        .tip-title { font-family: 'Orbitron'; font-size: 1.1rem; color: #fff; margin-bottom: 8px; }
         .tip-subtitle { font-family: 'Rajdhani'; font-size: 0.8rem; color: var(--neon-green); font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; }
         .tip-preview { color: #666; font-size: 0.9rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-        /* --- MODAL AJUSTADO --- */
-        #modal-tip { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.9); z-index: 10000; align-items: center; justify-content: center; 
-            backdrop-filter: blur(10px); padding: 15px;
-        }
-        .m-content { 
-            background: #050505; border: 1px solid var(--neon-green); width: 100%; max-width: 480px; 
-            max-height: 85vh; border-radius: 8px; position: relative; display: flex; flex-direction: column;
-            transform: scale(0.9); opacity: 0; transition: 0.3s;
-            box-shadow: 0 0 40px rgba(0, 255, 127, 0.15); overflow: hidden;
-        }
+        /* --- MODAL RECUPERADO CON VIDEO --- */
+        #modal-tip { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(15px); padding: 15px; }
+        .m-content { background: #050505; border: 1px solid var(--neon-green); width: 100%; max-width: 500px; max-height: 90vh; border-radius: 8px; position: relative; display: flex; flex-direction: column; overflow: hidden; transform: scale(0.9); opacity: 0; transition: 0.3s; }
         #modal-tip.active .m-content { transform: scale(1); opacity: 1; }
 
-        .m-header-img { width: 100%; max-height: 180px; object-fit: cover; border-bottom: 1px solid var(--neon-green); }
-        
+        .m-header-img { width: 100%; max-height: 200px; object-fit: cover; border-bottom: 1px solid var(--neon-green); }
+        .m-inner { padding: 25px; overflow-y: auto; flex-grow: 1; }
+        .m-inner::-webkit-scrollbar { width: 4px; }
+        .m-inner::-webkit-scrollbar-thumb { background: var(--neon-green); }
+
         .video-box { width: 100%; aspect-ratio: 16/9; background: #000; display: none; margin: 15px 0; border: 1px solid var(--neon-green); border-radius: 4px; }
         .video-box iframe { width: 100%; height: 100%; border: none; }
 
-        .m-inner { padding: 25px; overflow-y: auto; flex-grow: 1; }
-        .m-inner::-webkit-scrollbar { width: 5px; }
-        .m-inner::-webkit-scrollbar-thumb { background: var(--neon-green); border-radius: 10px; }
-
-        .m-title { font-family: 'Orbitron'; color: #fff; font-size: 1.2rem; margin-bottom: 10px; text-transform: uppercase; }
-        .m-sub { font-family: 'Orbitron'; color: var(--neon-green); font-size: 0.65rem; margin-bottom: 20px; display: block; letter-spacing: 2px; }
-        .m-text { color: #ccc; font-size: 0.95rem; line-height: 1.6; text-align: left; font-family: 'Rajdhani'; white-space: pre-wrap; }
-
-        .btn-close-m { 
-            width: 100%; padding: 18px; background: #000; border: none; border-top: 1px solid #111; 
-            color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.75rem; font-weight: 900; 
-            cursor: pointer; letter-spacing: 3px; transition: 0.3s; text-transform: uppercase;
-        }
-        .btn-close-m:hover { background: #0a0a0a; text-shadow: 0 0 10px var(--neon-green); }
+        .m-title { font-family: 'Orbitron'; color: #fff; font-size: 1.3rem; margin-bottom: 10px; text-transform: uppercase; }
+        .m-sub { font-family: 'Orbitron'; color: var(--neon-green); font-size: 0.7rem; margin-bottom: 20px; display: block; letter-spacing: 2px; }
+        .m-text { color: #ccc; font-size: 1rem; line-height: 1.6; font-family: 'Rajdhani'; white-space: pre-wrap; }
+        
+        .btn-close-m { width: 100%; padding: 20px; background: #000; border: none; border-top: 1px solid #111; color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.8rem; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; }
 
     </style>
 </head>
@@ -170,18 +110,10 @@
     <div id="particles-js"></div>
 
     <div id="maint-overlay">
-        <div class="maint-box">
-            <h1 class="glitch-text">ACCESS DENIED</h1>
-            <p class="maint-sub">SYSTEM UPDATING // BY SAMUEL HACK</p>
-            
-            <div style="font-family: 'Orbitron'; font-size: 0.6rem; color: #fff; letter-spacing: 2px;">
-                RE-ESTRUCTURANDO BASE DE DATOS...
-            </div>
-            
-            <div class="loader-bar"><div class="loader-progress"></div></div>
-            
-            <div style="font-family: 'Orbitron'; font-size: 1.5rem; color: #111; font-weight: 900; letter-spacing: 10px;">SAMUEL</div>
-        </div>
+        <h1 id="fb-maint-tit" class="maint-tit-clean">AJUSTANDO ZONAS</h1>
+        <p id="fb-maint-sub" class="maint-sub-clean">MEJORANDO INTERFAZ</p>
+        <div id="timer" class="timer-giant">00:00:00</div>
+        <div class="brand-footer">® SAMUEL HACK</div>
     </div>
 
     <header class="handler">
@@ -239,20 +171,46 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
+        // --- VISTAS ---
         const vRef = ref(db, 'Stats/total_views');
-        onValue(vRef, (s) => { document.getElementById('user-count').innerText = s.val().toLocaleString(); });
+        onValue(vRef, (s) => { if(s.exists()) document.getElementById('user-count').innerText = s.val().toLocaleString(); });
 
-        if(!localStorage.getItem('sh_visit_consejos')) {
-            runTransaction(vRef, (current) => { return (current || 0) + 1; });
-            localStorage.setItem('sh_visit_consejos', 'true');
-        }
+        // --- LÓGICA MANTENIMIENTO ---
+        let countdownSecs = 0;
+        let timerInterval;
 
-        // LÓGICA DE MANTENIMIENTO
-        onValue(ref(db, 'Config/mantenimiento_activo'), (s) => { 
-            document.getElementById('maint-overlay').style.display = s.val() ? 'flex' : 'none'; 
-            document.body.style.overflow = s.val() ? 'hidden' : 'auto';
+        onValue(ref(db, 'Config'), (snap) => {
+            const config = snap.val();
+            const overlay = document.getElementById('maint-overlay');
+            
+            if (config.mantenimiento_activo) {
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                document.getElementById('fb-maint-tit').innerText = config.maint_titulo || "AJUSTANDO ZONAS";
+                
+                let mins = parseInt(config.maint_tiempo) || 0;
+                countdownSecs = mins * 60;
+
+                clearInterval(timerInterval);
+                timerInterval = setInterval(() => {
+                    if (countdownSecs <= 0) {
+                        document.getElementById('timer').innerText = "00:00:00";
+                        return;
+                    }
+                    countdownSecs--;
+                    let h = Math.floor(countdownSecs / 3600);
+                    let m = Math.floor((countdownSecs % 3600) / 60);
+                    let s = countdownSecs % 60;
+                    document.getElementById('timer').innerText = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+                }, 1000);
+            } else {
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                clearInterval(timerInterval);
+            }
         });
 
+        // --- CARGA DE CARDS ---
         onValue(ref(db, 'consejos_card'), (snap) => {
             const grid = document.getElementById('grid');
             const data = snap.val();
@@ -282,7 +240,7 @@
             const vPlayer = document.getElementById('v-player');
             const mBody = document.getElementById('m-body');
             const mBodyExtra = document.getElementById('m-body-extra');
-
+            
             const lineas = texto.split('\n');
             if(lineas.length > 4 && video !== "") {
                 const mitad = Math.floor(lineas.length / 2);
@@ -322,13 +280,13 @@
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 90 },
+                "number": { "value": 80 },
                 "color": { "value": ["#00ff7f", "#00bfff"] },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.3 },
+                "opacity": { "value": 0.2 },
                 "size": { "value": 2 },
-                "line_linked": { "enable": true, "distance": 100, "color": "#00ff7f", "opacity": 0.1 },
-                "move": { "enable": true, "speed": 2 }
+                "line_linked": { "enable": true, "distance": 120, "color": "#00ff7f", "opacity": 0.1 },
+                "move": { "enable": true, "speed": 1.5 }
             }
         });
 
