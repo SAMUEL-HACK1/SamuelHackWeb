@@ -1,60 +1,369 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAMUEL HACK | OFFICIAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-        :root { --neon-green: #00ff7f; --neon-blue: #00bfff; --dark-bg: #000000; }
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-        body { background-color: var(--dark-bg); color: #fff; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; }
+        :root {
+            --neon-green: #00ff7f;
+            --neon-blue: #00bfff;
+            --dark-bg: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* LAS PARTICULAS SE MANTIENEN COMO FONDO FIJO PARA TODAS LAS VISTAS */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Fondo principal */
+        }
+
+        /* --- EFECTO BRILLITO METÁLICO --- */
+        .shine-anim {
+            background: linear-gradient(to right, #444 20%, #fff 40%, #fff 60%, #444 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine-sweep 3s linear infinite;
+        }
+
+        @keyframes shine-sweep {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* --- REDES SOCIALES AJUSTADAS --- */
+        .tactical-card {
+            position: relative;
+            width: 100%;
+            height: 85px; 
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            margin-bottom: 10px;
+        }
+
+        .icon-box {
+            width: 55px; 
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px; 
+            border: 2px solid currentColor;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        /* --- MODAL Y REDIRECCIÓN --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 5000;
+            backdrop-filter: blur(15px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-card {
+            width: 85%;
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .btn-ingresar {
+            width: 100%;
+            padding: 15px;
+            background: var(--neon-green);
+            border: none;
+            font-family: 'Orbitron';
+            font-weight: 900;
+            cursor: pointer;
+            margin-top: 20px;
+            text-transform: uppercase;
+            color: #000;
+        }
+
+        /* --- REDIRECCIÓN MEJORADA --- */
+        #redirect-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.85); 
+            z-index: 10000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .redirect-copy-center {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 12px;
+            color: #222;
+            text-transform: uppercase;
+            z-index: 10001;
+        }
 
         /* --- OVERLAYS DE BLOQUEO --- */
-        #maint-overlay, #browser-overlay { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #000; z-index: 10000; flex-direction: column; 
-            align-items: center; justify-content: center; text-align: center; 
+        #maint-overlay,
+        #browser-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 10000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         /* --- HANDLER ORIGINAL --- */
-        .handler { position: fixed; top: 0; width: 100%; height: 55px; background: linear-gradient(180deg, rgba(0,255,127,0.15) 0%, rgba(0,0,0,0.95) 100%); border-bottom: 1px solid rgba(0, 255, 127, 0.4); z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; backdrop-filter: blur(10px); }
-        .handler-logo { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900; letter-spacing: 4px; background: linear-gradient(to right, #fff, var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .status-pill { display: flex; align-items: center; gap: 10px; background: rgba(0, 0, 0, 0.6); padding: 5px 15px; border-radius: 50px; border: 1px solid var(--neon-green); font-family: 'Orbitron', sans-serif; font-size: 0.65rem; color: var(--neon-green); }
-        .dot { height: 8px; width: 8px; background-color: var(--neon-green); border-radius: 50%; box-shadow: 0 0 12px var(--neon-green); animation: pulse 1.2s infinite; }
-
-        /* --- PANEL DE ESTADÍSTICAS --- */
-        .user-stats-panel { position: fixed; top: 55px; width: 100%; z-index: 99; display: flex; justify-content: center; background: rgba(0, 0, 0, 0.4); border-bottom: 1px solid rgba(0, 191, 255, 0.2); padding: 5px 0; backdrop-filter: blur(5px); }
-        .stat-badge { font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 1px; display: flex; align-items: center; gap: 15px; color: #fff; }
-        .stat-value { color: var(--neon-blue); font-weight: 900; text-shadow: 0 0 5px var(--neon-blue); }
-
-        /* --- WRAPPER PRINCIPAL --- */
-        .content-wrapper { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 110px; padding-bottom: 50px; }
-        .last-update { font-family: 'Orbitron', sans-serif; font-size: 0.7rem; color: var(--neon-green); margin-bottom: 15px; letter-spacing: 2px; }
-        
-        .logo-placeholder { 
-            width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--neon-blue); 
-            margin-bottom: 25px; box-shadow: 0 0 25px var(--neon-blue); 
-            background-size: cover; background-position: center; 
+        .handler {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 55px;
+            background: linear-gradient(180deg, rgba(0, 255, 127, 0.15) 0%, rgba(0, 0, 0, 0.95) 100%);
+            border-bottom: 1px solid rgba(0, 255, 127, 0.4);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            backdrop-filter: blur(10px);
         }
 
-        .main-title { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: clamp(1.8rem, 5vw, 3rem); text-align: center; text-transform: uppercase; background: linear-gradient(90deg, #fff, var(--neon-blue), #fff); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; margin-bottom: 15px; }
-        .main-description { max-width: 80%; text-align: center; color: #bbb; font-size: 1.1rem; margin-bottom: 60px; line-height: 1.5; }
-        .section-box { width: 85%; max-width: 750px; margin-bottom: 70px; }
-        .zone-title { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--neon-green); margin-bottom: 12px; padding-left: 20px; border-left: 4px solid var(--neon-green); }
-        .zone-subtitle { font-size: 1rem; color: #888; padding-left: 45px; margin-bottom: 30px; line-height: 1.6; }
-        .btn-center { width: 100%; display: flex; justify-content: center; }
-        .btn-action { padding: 18px 55px; background: var(--neon-green); color: #000; font-family: 'Orbitron', sans-serif; font-weight: 900; text-transform: uppercase; font-size: 1.05rem; border: none; cursor: pointer; box-shadow: 0 0 25px var(--neon-green); transition: 0.3s; text-decoration: none; }
-        .btn-blue { background: var(--neon-blue); box-shadow: 0 0 25px var(--neon-blue); }
-        .copyright { margin-top: 30px; font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; letter-spacing: 10px; color: #333; text-align: center; }
-        @keyframes shine { to { background-position: 200% center; } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .handler-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(to right, #fff, var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 15px;
+            border-radius: 50px;
+            border: 1px solid var(--neon-green);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            color: var(--neon-green);
+        }
+
+        .dot {
+            height: 8px;
+            width: 8px;
+            background-color: var(--neon-green);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--neon-green);
+            animation: pulse 1.2s infinite;
+        }
+
+        /* --- PANEL DE ESTADÍSTICAS --- */
+        .user-stats-panel {
+            position: fixed;
+            top: 55px;
+            width: 100%;
+            z-index: 99;
+            display: flex;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+            padding: 5px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #fff;
+        }
+
+        .stat-value {
+            color: var(--neon-blue);
+            font-weight: 900;
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        /* --- WRAPPER PRINCIPAL --- */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 110px;
+            padding-bottom: 50px;
+        }
+
+        .last-update {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--neon-green);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .logo-placeholder {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid var(--neon-blue);
+            margin-bottom: 25px;
+            box-shadow: 0 0 25px var(--neon-blue);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .main-description {
+            max-width: 80%;
+            text-align: center;
+            color: #bbb;
+            font-size: 1.1rem;
+            margin-bottom: 60px;
+            line-height: 1.5;
+        }
+
+        .section-box {
+            width: 85%;
+            max-width: 750px;
+            margin-bottom: 70px;
+        }
+
+        .zone-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            margin-bottom: 12px;
+            padding-left: 20px;
+            border-left: 4px solid var(--neon-green);
+        }
+
+        .zone-subtitle {
+            font-size: 1rem;
+            color: #888;
+            padding-left: 45px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn-center {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-action {
+            padding: 18px 55px;
+            background: var(--neon-green);
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 25px var(--neon-green);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-blue {
+            background: var(--neon-blue);
+            box-shadow: 0 0 25px var(--neon-blue);
+        }
+
+        .copyright {
+            margin-top: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 10px;
+            color: #333;
+            text-align: center;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
     </style>
 </head>
+
 <body oncontextmenu="return false;">
+
     <div id="particles-js"></div>
-    
+
     <div id="browser-overlay">
         <h1 style="font-family:'Orbitron'; color:#ff4444; font-size: clamp(1.4rem, 5vw, 2.8rem); font-weight:900; text-transform:uppercase; margin-bottom:15px; text-shadow:0 0 25px rgba(255, 68, 68, 0.5);">NAVEGADOR BLOQUEADO</h1>
         <p style="color:#888; text-transform:uppercase; margin-bottom:50px;">Por seguridad, usa Chrome oficial o Safari de iPhone</p>
@@ -62,7 +371,7 @@
     </div>
 
     <div id="maint-overlay">
-        <h1 id="m-title" style="font-family:'Orbitron'; color:var(--neon-green); font-size: clamp(1.4rem, 5vw, 2.8rem); font-weight:900; text-transform:uppercase; margin-bottom:15px; text-shadow: 0 0 25px rgba(0, 255, 127, 0.5);">ACTUALIZACION DE WEB Y SISTEMA EN CURSO</h1>
+        <h1 id="m-title" class="shine-anim" style="font-family:'Orbitron'; color:var(--neon-green); font-size: clamp(1.4rem, 5vw, 2.8rem); font-weight:900; text-transform:uppercase; margin-bottom:15px;">ACTUALIZACION DE WEB Y SISTEMA EN CURSO</h1>
         <p id="m-subtitle" style="color:#888; text-transform:uppercase; margin-bottom:50px;">mejorando interfaz y sistema de descargas</p>
         <div id="m-timer" style="font-family:'Orbitron'; font-size: clamp(3.5rem, 12vw, 6.5rem); font-weight:900; color:#fff; text-shadow: 0 0 35px rgba(255, 255, 255, 0.3); margin-bottom: 70px;">00:00:00</div>
         <div style="font-family:'Orbitron'; font-size: 1.8rem; font-weight: 900; letter-spacing: 15px; color: #222;">®SAMUEL HACK</div>
@@ -85,24 +394,54 @@
         <div class="last-update" id="firebase-update">ACTUALIZADO HACE: CARGANDO...</div>
         <div class="logo-placeholder" id="main-logo-img"></div>
         
-        <h1 class="main-title" id="w-title">WEB OFICIAL DE DESCARGAS 2026</h1>
-        <p class="main-description" id="w-desc"> Web oficial de Samuel hack, permitida para la descarga de sus archivos oficiales de YouTube, por favor seleccione el apartado que necesite. </p>
+        <h1 class="main-title shine-anim" id="w-title">WEB OFICIAL DE DESCARGAS 2026</h1>
+        
+        <p class="main-description" id="w-desc">
+            Web oficial de Samuel hack, permitida para la descarga de sus archivos oficiales de YouTube, por favor seleccione el apartado que necesite.
+        </p>
 
         <div class="section-box">
-            <h2 class="zone-title" id="z1-t">ZONA 1 (ZONA DE DESCARGAS ARCHIVOS)</h2>
-            <p class="zone-subtitle" id="z1-s"> Aquí van a poder encontrar mis archivos subidos por fecha, título y tipo de archivo, sean hologramas, aimbot, regedit, etc hasta mejoras de rendimiento. Es necesario pasar la verificación. </p>
-            <div class="btn-center"> <a href="descargas.html" class="btn-action">DESCARGAR AHORA</a> </div>
+            <h2 class="zone-title shine-anim" id="z1-t">ZONA 1 (ZONA DE DESCARGAS ARCHIVOS)</h2>
+            <p class="zone-subtitle" id="z1-s">
+                Aquí van a poder encontrar mis archivos subidos por fecha, título y tipo de archivo, sean hologramas, aimbot, regedit, etc hasta mejoras de rendimiento. Es necesario pasar la verificación.
+            </p>
+            <div class="btn-center">
+                <a href="descargas.html" class="btn-action">DESCARGAR</a>
+            </div>
         </div>
 
         <div class="section-box">
-            <h2 class="zone-title" id="z2-t" style="color: var(--neon-blue); border-color: var(--neon-blue);">ZONA 2 (ZONA DE CONSEJOS)</h2>
-            <p class="zone-subtitle" id="z2-s"> Accede a las recomendaciones exclusivas y guías de configuración para optimizar el rendimiento y seguridad de tus archivos. </p>
-            <div class="btn-center"> <a href="consejos.html" class="btn-action btn-blue">VER CONSEJOS</a> </div>
+            <h2 class="zone-title shine-anim" id="z2-t" style="color: var(--neon-blue); border-color: var(--neon-blue);">ZONA 2 (ZONA DE CONSEJOS)</h2>
+            <p class="zone-subtitle" id="z2-s">
+                Accede a las recomendaciones exclusivas y guías de configuración para optimizar el rendimiento y seguridad de tus archivos.
+            </p>
+            <div class="btn-center">
+                <a href="consejos.html" class="btn-action btn-blue">VER CONSEJOS</a>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h2 class="zone-title shine-anim" style="color: #fff; border-color: #fff;">REDES SOCIALES OFICIALES</h2>
+            <div id="social-list"></div>
         </div>
 
         <div class="copyright">© SAMUEL HACK</div>
     </div>
 
+    <div class="modal-overlay" id="modal-container">
+        <div class="modal-card" id="modal-border-color">
+            <h2 id="modal-title" class="shine-anim" style="font-family:'Orbitron'; margin-bottom:15px; font-size:1.2rem;"></h2>
+            <p id="modal-desc" style="color:#ccc; margin-bottom:20px; font-size:0.9rem; line-height:1.4;"></p>
+            <button class="btn-ingresar" id="modal-btn">Ingresar ahora</button>
+        </div>
+    </div>
+
+    <div id="redirect-screen">
+        <div class="shine-anim" style="font-family:'Orbitron'; font-size: 2.5rem; font-weight:900; text-align:center; z-index: 10001;">ABRIENDO ENLACE...</div>
+        <div class="redirect-copy-center">®SAMUEL HACK</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
@@ -120,41 +459,125 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // --- SEGURIDAD DE NAVEGADOR INTENSIVA (BLOQUEA BRAVE/FIREFOX/ETC) ---
+        // --- LÓGICA DEL CRONÓMETRO DE MANTENIMIENTO ---
+        let timerInterval;
+        function startTimer(targetDate) {
+            if (timerInterval) clearInterval(timerInterval);
+            const countdownDate = new Date(targetDate).getTime();
+
+            timerInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById("m-timer").innerText = "00:00:00";
+                    return;
+                }
+
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("m-timer").innerText = 
+                    (hours < 10 ? "0" + hours : hours) + ":" + 
+                    (minutes < 10 ? "0" + minutes : minutes) + ":" + 
+                    (seconds < 10 ? "0" + seconds : seconds);
+            }, 1000);
+        }
+
+        // INICIALIZACIÓN DE PARTICULAS
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00ff7f" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00ff7f", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 4, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }
+            },
+            "retina_detect": true
+        });
+
+        // --- LÓGICA DE REDES SOCIALES ---
+        onValue(ref(db, 'Redes_Sociales'), (snap) => {
+            const list = document.getElementById('social-list');
+            list.innerHTML = "";
+            const data = snap.val();
+            if(data) {
+                Object.keys(data).forEach(key => {
+                    const item = data[key];
+                    const card = document.createElement('div');
+                    card.className = `tactical-card`;
+                    const cardColor = item.color || '#00ff7f';
+                    card.style.borderLeft = `8px solid ${cardColor}`;
+                    card.innerHTML = `
+                        <div class="icon-box" style="color:${cardColor}"><i class="${item.icon || 'fab fa-whatsapp'}"></i></div>
+                        <div>
+                            <h3 style="font-family:'Orbitron'; font-size:0.9rem;">${item.title}</h3>
+                            <p style="font-size:0.8rem; color:#888;">${item.tag || 'OFICIAL'}</p>
+                        </div>
+                    `;
+                    card.onclick = () => {
+                        const modal = document.getElementById('modal-container');
+                        const modalBorder = document.getElementById('modal-border-color');
+                        document.getElementById('modal-title').innerText = item.modal_title || item.title;
+                        document.getElementById('modal-desc').innerText = item.modal_desc || item.desc || "Accede al enlace oficial.";
+                        modalBorder.style.borderLeft = `10px solid ${cardColor}`;
+                        document.getElementById('modal-btn').style.background = cardColor;
+                        modal.style.display = 'flex';
+                        document.getElementById('modal-btn').onclick = () => {
+                            modal.style.display = 'none';
+                            document.getElementById('redirect-screen').style.display = 'flex';
+                            setTimeout(() => { window.location.href = item.url; }, 3000);
+                        };
+                    };
+                    list.appendChild(card);
+                });
+            }
+        });
+
+        window.onclick = (e) => { if(e.target.id == 'modal-container') document.getElementById('modal-container').style.display = 'none'; };
+
+        // --- SEGURIDAD DE NAVEGADOR ---
         const ua = navigator.userAgent;
         const vendor = navigator.vendor;
         const isChrome = /Chrome/.test(ua) && /Google Inc/.test(vendor) && !/Brave|Edg|OPR/.test(ua);
         const isIphoneSafari = /iPhone|iPad|iPod/.test(ua) && /Apple/.test(vendor) && !/CriOS|FxiOS|OPiOS/.test(ua);
         const isMacSafari = /Safari/.test(ua) && /Apple Computer/.test(vendor) && !/Chrome|CriOS/.test(ua);
+        if (!isChrome && !isIphoneSafari && !isMacSafari) { document.getElementById('browser-overlay').style.display = 'flex'; }
 
-        if (!isChrome && !isIphoneSafari && !isMacSafari) { 
-            document.getElementById('browser-overlay').style.display = 'flex'; 
-        }
-
-        // --- AUTO-CONTADOR DE VISUALIZACIONES ÚNICAS ---
+        // --- CONTADOR DE VISTAS ---
         const viewsRef = ref(db, 'Stats/total_views');
         if (!localStorage.getItem('v_sh')) {
             runTransaction(viewsRef, (val) => (val || 0) + 1);
             localStorage.setItem('v_sh', 'true');
         }
-        onValue(viewsRef, (snap) => { document.getElementById('user-count').innerText = snap.val().toLocaleString(); });
+        onValue(viewsRef, (snap) => { if(snap.exists()) document.getElementById('user-count').innerText = snap.val().toLocaleString(); });
 
-        // --- MANTENIMIENTO (Sincronizado con Admin V15) ---
+        // --- MANTENIMIENTO ---
         onValue(ref(db, 'Config'), (snap) => {
             const d = snap.val();
             const overlay = document.getElementById('maint-overlay');
             if(d && d.mantenimiento_activo) {
                 overlay.style.display = 'flex';
-                document.body.style.overflow = 'hidden'; 
+                document.body.style.overflow = 'hidden';
                 document.getElementById('m-title').innerText = d.maint_titulo || "ACTUALIZACION EN CURSO";
-                startTimer(d.maint_tiempo * 60 || 3600);
+                // Iniciar el cronómetro con el tiempo de Firebase
+                if(d.maint_timer) startTimer(d.maint_timer);
             } else {
                 overlay.style.display = 'none';
                 document.body.style.overflow = 'auto';
+                if (timerInterval) clearInterval(timerInterval);
             }
         });
 
-        // --- TEXTOS DINÁMICOS Y LOGO (Config_web) ---
+        // --- TEXTOS DINÁMICOS ---
         onValue(ref(db, 'Config_web'), (snap) => {
             const d = snap.val();
             if(d) {
@@ -163,32 +586,8 @@
                 if(d.web_descripcion) document.getElementById('w-desc').innerText = d.web_descripcion;
                 if(d.pfp_url) document.getElementById('main-logo-img').style.backgroundImage = `url('${d.pfp_url}')`;
                 if(d.update_time) document.getElementById('firebase-update').innerText = "ACTUALIZADO HACE: " + d.update_time;
-                if(d.zona1_titulo) document.getElementById('z1-t').innerText = d.zona1_titulo;
-                if(d.zona1_subtitulo) document.getElementById('z1-s').innerText = d.zona1_subtitulo;
-                if(d.zona2_titulo) document.getElementById('z2-t').innerText = d.zona2_titulo;
-                if(d.zona2_subtitulo) document.getElementById('z2-s').innerText = d.zona2_subtitulo;
             }
         });
-
-        let tInt;
-        function startTimer(s) {
-            clearInterval(tInt);
-            let t = s;
-            tInt = setInterval(() => {
-                let h = Math.floor(t/3600), m = Math.floor((t%3600)/60), sc = t%60;
-                document.getElementById('m-timer').innerText = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${sc.toString().padStart(2,'0')}`;
-                if(t<=0) clearInterval(tInt);
-                t--;
-            }, 1000);
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        particlesJS("particles-js", { "particles": { "number": { "value": 110 }, "color": { "value": ["#00ff7f", "#00bfff"] }, "shape": { "type": "circle" }, "opacity": { "value": 0.4 }, "size": { "value": 2.5 }, "line_linked": { "enable": true, "distance": 110, "color": "#00ff7f", "opacity": 0.15 }, "move": { "enable": true, "speed": 3.5 } } });
-        // SEGURIDAD ANTI-HACKING INTENSIVA
-        document.onkeydown = function(e) { 
-            if(event.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83))) return false; 
-        };
     </script>
 </body>
 </html>
