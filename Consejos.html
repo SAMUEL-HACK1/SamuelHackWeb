@@ -1,0 +1,616 @@
+<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <title>CONSEJOS VIP | SAMUEL HACK</title> <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <style> :root { --neon-green: #00ff7f; --neon-blue: #00bfff; --dark-bg: #000000; --dark-card: rgba(10, 10, 10, 0.98); } * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; } body { background-color: var(--dark-bg); color: #fff; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; } #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; } /* --- PANTALLA MANTENIMIENTO "ESTILO IMAGEN" --- */ #maint-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 30000; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; } .maint-tit-clean { font-family: 'Orbitron'; font-size: clamp(1.5rem, 8vw, 2.8rem); color: var(--neon-green); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 20px rgba(0, 255, 127, 0.4); margin-bottom: 5px; } .maint-sub-clean { font-family: 'Rajdhani'; color: #666; text-transform: uppercase; letter-spacing: 4px; font-size: 0.9rem; font-weight: 700; margin-bottom: 50px; } .timer-giant { font-family: 'Orbitron'; font-size: clamp(3rem, 15vw, 6rem); color: #fff; font-weight: 900; letter-spacing: -2px; text-shadow: 0 0 30px rgba(255, 255, 255, 0.2); margin-bottom: 60px; } .brand-footer { font-family: 'Orbitron'; font-size: 1.2rem; color: #222; font-weight: 900; letter-spacing: 12px; margin-top: 20px; } /* --- HEADER Y ESTRUCTURA --- */ .handler { position: fixed; top: 0; width: 100%; height: 55px; background: linear-gradient(180deg, rgba(0,255,127,0.15) 0%, rgba(0,0,0,0.95) 100%); border-bottom: 1px solid rgba(0, 255, 127, 0.4); z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; backdrop-filter: blur(10px); } .handler-logo { font-family: 'Orbitron'; font-size: 1rem; font-weight: 900; letter-spacing: 4px; background: linear-gradient(to right, #fff, var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; } .status-pill { display: flex; align-items: center; gap: 10px; background: rgba(0, 0, 0, 0.6); padding: 5px 15px; border-radius: 50px; border: 1px solid var(--neon-green); font-family: 'Orbitron'; font-size: 0.65rem; color: var(--neon-green); } .dot { height: 8px; width: 8px; background-color: var(--neon-green); border-radius: 50%; box-shadow: 0 0 12px var(--neon-green); animation: pulse 1.2s infinite; } @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } } .user-stats-panel { position: fixed; top: 55px; width: 100%; z-index: 999; display: flex; justify-content: center; background: rgba(0, 0, 0, 0.4); border-bottom: 1px solid rgba(0, 191, 255, 0.2); padding: 5px 0; backdrop-filter: blur(5px); } .stat-badge { font-family: 'Orbitron'; font-size: 0.6rem; letter-spacing: 1px; display: flex; align-items: center; gap: 15px; color: #fff; } .stat-value { color: var(--neon-blue); font-weight: 900; text-shadow: 0 0 5px var(--neon-blue); } .main-content { position: relative; z-index: 10; width: 100%; max-width: 1100px; margin: 160px auto 100px; padding: 0 20px; } .btn-back { display: inline-block; margin-bottom: 30px; text-decoration: none; font-family: 'Orbitron'; font-size: 0.7rem; color: var(--neon-blue); letter-spacing: 1px; } .search-area { position: relative; margin-bottom: 50px; } .search-bar { width: 100%; padding: 18px 18px 18px 60px; background: rgba(255,255,255,0.03); border: 1px solid rgba(0,255,127,0.2); color: #fff; font-size: 1.1rem; border-radius: 4px; outline: none; font-family: 'Rajdhani'; } .search-area i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--neon-green); font-size: 1.2rem; } .grid-tips { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; } .tip-card { background: var(--dark-card); border: 1px solid rgba(0, 255, 127, 0.2); border-radius: 4px; overflow: hidden; transition: 0.4s; cursor: pointer; animation: fadeInUp 0.5s ease backwards; } @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } } .tip-img { width: 100%; height: 180px; object-fit: cover; filter: brightness(0.7); } .tip-body { padding: 25px; } .tip-title { font-family: 'Orbitron'; font-size: 1.1rem; color: #fff; margin-bottom: 8px; } .tip-subtitle { font-family: 'Rajdhani'; font-size: 0.8rem; color: var(--neon-green); font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; } .tip-preview { color: #666; font-size: 0.9rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } /* --- MODAL RECUPERADO CON VIDEO --- */ #modal-tip { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(15px); padding: 15px; } .m-content { background: #050505; border: 1px solid var(--neon-green); width: 100%; max-width: 500px; max-height: 90vh; border-radius: 8px; position: relative; display: flex; flex-direction: column; overflow: hidden; transform: scale(0.9); opacity: 0; transition: 0.3s; } #modal-tip.active .m-content { transform: scale(1); opacity: 1; } .m-header-img { width: 100%; max-height: 200px; object-fit: cover; border-bottom: 1px solid var(--neon-green); } .m-inner { padding: 25px; overflow-y: auto; flex-grow: 1; } .m-inner::-webkit-scrollbar { width: 4px; } .m-inner::-webkit-scrollbar-thumb { background: var(--neon-green); } .video-box { width: 100%; aspect-ratio: 16/9; background: #000; display: none; margin: 15px 0; border: 1px solid var(--neon-green); border-radius: 4px; } .video-box iframe { width: 100%; height: 100%; border: none; } .m-title { font-family: 'Orbitron'; color: #fff; font-size: 1.3rem; margin-bottom: 10px; text-transform: uppercase; } .m-sub { font-family: 'Orbitron'; color: var(--neon-green); font-size: 0.7rem; margin-bottom: 20px; display: block; letter-spacing: 2px; } .m-text { color: #ccc; font-size: 1rem; line-height: 1.6; font-family: 'Rajdhani'; white-space: pre-wrap; } .btn-close-m { width: 100%; padding: 20px; background: #000; border: none; border-top: 1px solid #111; color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.8rem; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; }
+
+        /* --- VISTAS Y LIKES EN CARD --- */
+        .tip-stats-row { display: flex; gap: 12px; margin-top: 12px; align-items: center; }
+        .tip-stat-badge { display: flex; align-items: center; gap: 5px; font-family: 'Orbitron'; font-size: 0.55rem; color: #444; letter-spacing: 1px; }
+        .tip-stat-badge i { font-size: 0.65rem; }
+        .tip-stat-badge.likes-active { color: var(--neon-green); }
+
+        /* --- STATS EN MODAL --- */
+        .modal-stats-row { display: flex; gap: 20px; margin-bottom: 18px; align-items: center; flex-wrap: wrap; }
+        .modal-stat-item { display: flex; align-items: center; gap: 6px; font-family: 'Orbitron'; font-size: 0.6rem; color: #555; letter-spacing: 1px; }
+        .modal-stat-item span { color: #fff; font-weight: 900; }
+        .btn-like-modal { background: transparent; border: 1px solid #333; color: #555; font-family: 'Orbitron'; font-size: 0.6rem; padding: 6px 14px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.3s; letter-spacing: 1px; }
+        .btn-like-modal.liked { border-color: var(--neon-green); color: var(--neon-green); box-shadow: 0 0 10px rgba(0,255,127,0.2); }
+        .btn-like-modal:hover { border-color: var(--neon-green); color: var(--neon-green); }
+
+        /* --- BLOQUE COMANDO COPIABLE --- */
+        .comando-block { background: #0a0a0a; border: 1px solid rgba(0,191,255,0.3); border-radius: 6px; padding: 14px 16px; margin: 15px 0; display: none; }
+        .comando-label { font-family: 'Orbitron'; font-size: 0.55rem; color: var(--neon-blue); letter-spacing: 2px; margin-bottom: 8px; display: block; }
+        .comando-text { font-family: 'Courier New', monospace; font-size: 0.85rem; color: #eee; word-break: break-all; user-select: text; -webkit-user-select: text; line-height: 1.5; }
+        .btn-copy-cmd { margin-top: 10px; background: transparent; border: 1px solid var(--neon-blue); color: var(--neon-blue); font-family: 'Orbitron'; font-size: 0.6rem; padding: 6px 14px; border-radius: 4px; cursor: pointer; transition: 0.3s; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+        .btn-copy-cmd:hover { background: var(--neon-blue); color: #000; }
+        .btn-copy-cmd.copied { background: var(--neon-green); border-color: var(--neon-green); color: #000; }
+
+        /* --- BOTÓN COMPARTIR EN MODAL --- */
+        .btn-share-modal { background: transparent; border: 1px solid #333; color: #555; font-family: 'Orbitron'; font-size: 0.6rem; padding: 6px 14px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.3s; letter-spacing: 1px; }
+        .btn-share-modal:hover { border-color: var(--neon-blue); color: var(--neon-blue); }
+        .btn-share-modal.shared { border-color: var(--neon-blue); color: var(--neon-blue); box-shadow: 0 0 10px rgba(0,191,255,0.2); }
+
+        /* --- BOTÓN BOMBILLO SUGERENCIAS (DERECHA) --- */
+        #btn-sugerencia { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--neon-green); border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 9999; cursor: pointer; box-shadow: 0 0 20px rgba(0,255,127,0.5); transition: 0.3s; border: none; }
+        #btn-sugerencia:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(0,255,127,0.7); }
+        #btn-sugerencia i { color: #000; font-size: 1.5rem; }
+
+        /* --- MODAL SUGERENCIAS --- */
+        #modal-sugerencia { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 40000; align-items: center; justify-content: center; backdrop-filter: blur(10px); padding: 15px; }
+        #modal-sugerencia.active { display: flex; }
+        .sug-box { background: #080808; border: 1px solid var(--neon-green); width: 100%; max-width: 400px; border-radius: 10px; padding: 30px; text-align: center; box-shadow: 0 0 30px rgba(0,255,127,0.1); }
+        .sug-title { font-family: 'Orbitron'; font-size: 0.85rem; color: var(--neon-green); font-weight: 900; letter-spacing: 2px; margin-bottom: 6px; }
+        .sug-sub { font-family: 'Rajdhani'; font-size: 0.8rem; color: #444; margin-bottom: 22px; text-transform: uppercase; letter-spacing: 1px; }
+        .sug-input { width: 100%; background: #000; border: 1px solid #222; color: #fff; font-family: 'Rajdhani'; font-size: 0.95rem; padding: 12px 14px; border-radius: 4px; outline: none; margin-bottom: 12px; }
+        .sug-textarea { width: 100%; background: #000; border: 1px solid #222; color: #fff; font-family: 'Rajdhani'; font-size: 0.95rem; padding: 12px 14px; border-radius: 4px; outline: none; margin-bottom: 18px; height: 90px; resize: none; }
+        .btn-sug-enviar { width: 100%; padding: 12px; background: var(--neon-green); color: #000; font-family: 'Orbitron'; font-size: 0.75rem; font-weight: 900; border: none; border-radius: 4px; cursor: pointer; letter-spacing: 2px; transition: 0.3s; }
+        .btn-sug-enviar:hover { box-shadow: 0 0 20px var(--neon-green); }
+        .btn-sug-cancel { margin-top: 12px; background: transparent; border: none; color: #333; font-family: 'Orbitron'; font-size: 0.6rem; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* --- MODAL BIENVENIDA CONSEJOS --- */
+        #modal-welcome-cons { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.93); z-index: 50000; align-items: center; justify-content: center; backdrop-filter: blur(8px); padding: 15px; }
+        #modal-welcome-cons.visible { display: flex; }
+        .welcome-cons-box { background: #080808; border: 1px solid rgba(0,255,127,0.3); width: 100%; max-width: 560px; border-radius: 12px; overflow: hidden; box-shadow: 0 0 50px rgba(0,255,127,0.08); }
+        .welcome-cons-video { width: 100%; aspect-ratio: 16/9; background: #000; display: flex; align-items: center; justify-content: center; }
+        .welcome-cons-video iframe { width: 100%; height: 100%; border: none; display: none; }
+        .welcome-cons-placeholder { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .welcome-cons-placeholder i { font-size: 3rem; color: rgba(0,255,127,0.15); }
+        .welcome-cons-placeholder span { font-family: 'Orbitron'; font-size: 0.6rem; color: #222; letter-spacing: 2px; }
+        .welcome-cons-body { padding: 25px; }
+        .welcome-cons-titulo { font-family: 'Orbitron'; font-size: 1rem; color: var(--neon-green); font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; }
+        .welcome-cons-texto { color: #999; font-size: 0.88rem; line-height: 1.7; margin-bottom: 20px; font-family: 'Rajdhani'; }
+        .welcome-cons-footer { display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
+        .btn-welcome-cons-ok { background: transparent; border: 1px solid var(--neon-green); color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.7rem; padding: 10px 25px; cursor: pointer; letter-spacing: 2px; border-radius: 4px; transition: 0.3s; }
+        .btn-welcome-cons-ok:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 20px var(--neon-green); }
+        .welcome-cons-skip { font-size: 0.6rem; color: #333; cursor: pointer; font-family: 'Orbitron'; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- NUEVO: NOTIFICACIÓN TOAST --- */
+        #notif-toast { position: fixed; top: 80px; left: 50%; transform: translateX(-50%) translateY(-20px); background: #080808; border: 1px solid var(--neon-green); border-radius: 8px; padding: 14px 22px; font-family: 'Orbitron'; font-size: 0.65rem; color: var(--neon-green); letter-spacing: 2px; z-index: 99999; opacity: 0; transition: opacity 0.4s, transform 0.4s; pointer-events: none; display: flex; align-items: center; gap: 10px; box-shadow: 0 0 20px rgba(0,255,127,0.15); white-space: nowrap; }
+        #notif-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        #notif-toast i { font-size: 1rem; }
+
+        /* --- NUEVO: BOTÓN NOTIFICACIONES (campana) --- */
+        #btn-notif { position: fixed; bottom: 100px; right: 30px; width: 50px; height: 50px; background: #111; border: 1px solid rgba(0,191,255,0.4); border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 9999; cursor: pointer; box-shadow: 0 0 15px rgba(0,191,255,0.2); transition: 0.3s; }
+        #btn-notif:hover { border-color: var(--neon-blue); box-shadow: 0 0 25px rgba(0,191,255,0.4); transform: scale(1.1); }
+        #btn-notif i { color: var(--neon-blue); font-size: 1.1rem; }
+        #btn-notif .notif-dot { position: absolute; top: 6px; right: 6px; width: 9px; height: 9px; background: var(--neon-green); border-radius: 50%; display: none; box-shadow: 0 0 8px var(--neon-green); animation: pulse 1.2s infinite; }
+        #btn-notif.activo .notif-dot { display: block; }
+
+        /* --- NUEVO: MODAL RANKING --- */
+        #modal-ranking { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 20000; align-items: center; justify-content: center; backdrop-filter: blur(15px); padding: 15px; }
+        #modal-ranking.active { display: flex; }
+        .ranking-box { background: #050505; border: 1px solid var(--neon-green); width: 100%; max-width: 480px; max-height: 85vh; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; }
+        .ranking-header { padding: 22px 25px 16px; border-bottom: 1px solid #111; }
+        .ranking-titulo { font-family: 'Orbitron'; font-size: 1rem; color: var(--neon-green); font-weight: 900; letter-spacing: 3px; }
+        .ranking-sub { font-family: 'Orbitron'; font-size: 0.55rem; color: #333; letter-spacing: 2px; margin-top: 4px; }
+        .ranking-tabs { display: flex; border-bottom: 1px solid #111; }
+        .ranking-tab { flex: 1; padding: 10px; font-family: 'Orbitron'; font-size: 0.6rem; color: #444; letter-spacing: 1px; cursor: pointer; text-align: center; border: none; background: transparent; transition: 0.3s; }
+        .ranking-tab.active { color: var(--neon-green); border-bottom: 2px solid var(--neon-green); }
+        .ranking-list { overflow-y: auto; flex-grow: 1; padding: 15px; }
+        .ranking-list::-webkit-scrollbar { width: 3px; } .ranking-list::-webkit-scrollbar-thumb { background: var(--neon-green); }
+        .ranking-item { display: flex; align-items: center; gap: 14px; padding: 12px 10px; border-bottom: 1px solid #0d0d0d; cursor: pointer; transition: 0.3s; }
+        .ranking-item:hover { background: rgba(0,255,127,0.03); }
+        .ranking-pos { font-family: 'Orbitron'; font-size: 1.1rem; font-weight: 900; width: 28px; text-align: center; }
+        .ranking-pos.gold { color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+        .ranking-pos.silver { color: #c0c0c0; }
+        .ranking-pos.bronze { color: #cd7f32; }
+        .ranking-pos.other { color: #333; }
+        .ranking-img { width: 42px; height: 42px; border-radius: 4px; object-fit: cover; filter: brightness(0.8); flex-shrink: 0; }
+        .ranking-info { flex-grow: 1; min-width: 0; }
+        .ranking-name { font-family: 'Orbitron'; font-size: 0.65rem; color: #fff; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ranking-tag { font-family: 'Rajdhani'; font-size: 0.7rem; color: #444; margin-top: 2px; }
+        .ranking-val { font-family: 'Orbitron'; font-size: 0.75rem; font-weight: 900; color: var(--neon-green); flex-shrink: 0; }
+        .ranking-empty { font-family: 'Orbitron'; font-size: 0.6rem; color: #222; text-align: center; padding: 40px 20px; letter-spacing: 2px; }
+        .btn-close-ranking { width: 100%; padding: 18px; background: #000; border: none; border-top: 1px solid #111; color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.75rem; font-weight: 900; cursor: pointer; letter-spacing: 3px; }
+
+        /* --- NUEVO: BOTÓN RANKING (trofeo) --- */
+        #btn-ranking { position: fixed; bottom: 160px; right: 30px; width: 50px; height: 50px; background: #111; border: 1px solid rgba(255,215,0,0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 9999; cursor: pointer; box-shadow: 0 0 15px rgba(255,215,0,0.1); transition: 0.3s; }
+        #btn-ranking:hover { border-color: #ffd700; box-shadow: 0 0 25px rgba(255,215,0,0.3); transform: scale(1.1); }
+        #btn-ranking i { color: #ffd700; font-size: 1.1rem; }
+
+</style> </head> <body oncontextmenu="return false;"> <div id="particles-js"></div>
+
+<!-- TOAST NOTIFICACIÓN -->
+<div id="notif-toast"><i class="fas fa-bell"></i> <span id="notif-toast-msg">NUEVO ARTÍCULO DISPONIBLE</span></div>
+
+<div id="maint-overlay"> <h1 id="fb-maint-tit" class="maint-tit-clean">AJUSTANDO ZONAS</h1> <p id="fb-maint-sub" class="maint-sub-clean">MEJORANDO INTERFAZ</p> <div id="timer" class="timer-giant">00:00:00</div> <div class="brand-footer">® SAMUEL HACK</div> </div>
+
+    <!-- MODAL BIENVENIDA CONSEJOS -->
+    <div id="modal-welcome-cons">
+        <div class="welcome-cons-box">
+            <div class="welcome-cons-video" id="wc-video-area">
+                <div class="welcome-cons-placeholder" id="wc-placeholder">
+                    <i class="fas fa-play-circle"></i>
+                    <span>SIN VIDEO CONFIGURADO</span>
+                </div>
+                <iframe id="wc-iframe" allowfullscreen></iframe>
+            </div>
+            <div class="welcome-cons-body">
+                <div class="welcome-cons-titulo" id="wc-titulo">BIENVENIDO</div>
+                <div class="welcome-cons-texto" id="wc-texto">Cargando información...</div>
+                <div class="welcome-cons-footer">
+                    <span class="welcome-cons-skip" onclick="cerrarWelcomeCons()">SALTAR</span>
+                    <button class="btn-welcome-cons-ok" onclick="cerrarWelcomeCons()">ENTRAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÓN BOMBILLO SUGERENCIAS (ahora a la DERECHA) -->
+    <button id="btn-sugerencia" onclick="abrirSugerencia()">
+        <i class="fas fa-lightbulb"></i>
+    </button>
+
+    <!-- NUEVO: BOTÓN NOTIFICACIONES -->
+    <button id="btn-notif" onclick="toggleNotificaciones()" title="Notificaciones">
+        <div class="notif-dot"></div>
+        <i class="fas fa-bell"></i>
+    </button>
+
+    <!-- NUEVO: BOTÓN RANKING -->
+    <button id="btn-ranking" onclick="abrirRanking()" title="Ranking">
+        <i class="fas fa-trophy"></i>
+    </button>
+
+    <!-- MODAL SUGERENCIAS -->
+    <div id="modal-sugerencia">
+        <div class="sug-box">
+            <div class="sug-title">💡 SUGERIR ARTÍCULO</div>
+            <div class="sug-sub">¿Tienes una idea? Compártela</div>
+            <input type="text" id="sug-nombre" class="sug-input" placeholder="Tu nombre o alias...">
+            <textarea id="sug-idea" class="sug-textarea" placeholder="Describe el artículo o consejo que quieres ver..."></textarea>
+            <button class="btn-sug-enviar" onclick="enviarSugerencia()">ENVIAR SUGERENCIA</button>
+            <button class="btn-sug-cancel" onclick="cerrarSugerencia()">CANCELAR</button>
+        </div>
+    </div>
+
+    <!-- NUEVO: MODAL RANKING -->
+    <div id="modal-ranking">
+        <div class="ranking-box">
+            <div class="ranking-header">
+                <div class="ranking-titulo">🏆 RANKING</div>
+                <div class="ranking-sub">TOP ARTÍCULOS · SAMUEL HACK</div>
+            </div>
+            <div class="ranking-tabs">
+                <button class="ranking-tab active" onclick="cambiarTabRanking('vistas', this)"><i class="fas fa-eye"></i> MÁS VISTOS</button>
+                <button class="ranking-tab" onclick="cambiarTabRanking('likes', this)"><i class="fas fa-heart"></i> MÁS LIKES</button>
+            </div>
+            <div class="ranking-list" id="ranking-list">
+                <div class="ranking-empty">CARGANDO...</div>
+            </div>
+            <button class="btn-close-ranking" onclick="cerrarRanking()">CERRAR</button>
+        </div>
+    </div>
+
+<header class="handler"> <div class="handler-logo">SAMUEL HACK</div> <div class="status-pill"><div class="dot"></div> ONLINE</div> </header> <div class="user-stats-panel"> <div class="stat-badge"> <span>VISUALIZACIONES: <span class="stat-value" id="user-count">0</span></span> <span style="color: rgba(255,255,255,0.2);">|</span> <span>DATA_LOAD: <span class="stat-value">100%</span></span> </div> </div> <div class="main-content"> <a href="index.html" class="btn-back"><i class="fas fa-chevron-left"></i> VOLVER AL MENÚ</a> <div class="search-area"> <i class="fas fa-search"></i> <input type="text" id="bus" class="search-bar" placeholder="Buscar inteligencia..." onkeyup="filtrar()"> </div> <div class="grid-tips" id="grid"></div> </div>
+
+<div id="modal-tip"> <div class="m-content"> <img id="m-img" src="" class="m-header-img"> <div class="m-inner"> <h2 id="m-tit" class="m-title"></h2> <span id="m-sub" class="m-sub"></span>
+
+            <!-- STATS (VISTAS Y LIKES) EN MODAL + BOTÓN COMPARTIR -->
+            <div class="modal-stats-row">
+                <div class="modal-stat-item"><i class="fas fa-eye"></i> <span id="modal-vistas">0</span> VISTAS</div>
+                <div class="modal-stat-item"><i class="fas fa-heart"></i> <span id="modal-likes">0</span> LIKES</div>
+                <button class="btn-like-modal" id="btn-like-modal" onclick="toggleLike()"><i class="fas fa-heart"></i> ME GUSTA</button>
+                <!-- NUEVO: BOTÓN COMPARTIR -->
+                <button class="btn-share-modal" id="btn-share-modal" onclick="compartirArticulo()"><i class="fas fa-share-alt"></i> COMPARTIR</button>
+            </div>
+
+            <div id="m-body" class="m-text"></div>
+
+            <!-- BLOQUE COMANDO COPIABLE -->
+            <div class="comando-block" id="comando-block">
+                <span class="comando-label"><i class="fas fa-terminal"></i> COMANDO / CÓDIGO</span>
+                <div class="comando-text" id="comando-text"></div>
+                <button class="btn-copy-cmd" id="btn-copy" onclick="copiarComando()"><i class="fas fa-copy"></i> COPIAR</button>
+            </div>
+
+            <div class="video-box" id="v-box"> <iframe id="v-player" src="" allowfullscreen></iframe> </div> <div id="m-body-extra" class="m-text" style="margin-top:15px;"></div> </div> <button class="btn-close-m" onclick="cerrar()">CERRAR ARTÍCULO</button> </div> </div>
+
+<script type="module"> import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js"; import { getDatabase, ref, onValue, runTransaction, push, set, get } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js"; const firebaseConfig = { apiKey: "AIzaSyDd2lMfzK96vABG9FVU7aPlbiRvTCFNNNg", authDomain: "samuelhackweb.firebaseapp.com", databaseURL: "https://samuelhackweb-default-rtdb.firebaseio.com", projectId: "samuelhackweb", storageBucket: "samuelhackweb.firebasestorage.app", messagingSenderId: "398823531934", appId: "1:398823531934:web:9a00eef74e8d69a04d628f" }; const app = initializeApp(firebaseConfig); const db = getDatabase(app);
+
+        // --- ID ÚNICO DE USUARIO (persistente en localStorage) ---
+        let userId = localStorage.getItem('sh_uid');
+        if (!userId) { userId = 'u_' + Math.random().toString(36).substr(2, 12) + '_' + Date.now(); localStorage.setItem('sh_uid', userId); }
+
+        // --- VISTAS GLOBALES ---
+        const vRef = ref(db, 'Stats/total_views');
+        onValue(vRef, (s) => { if(s.exists()) document.getElementById('user-count').innerText = s.val().toLocaleString(); });
+
+        // --- LÓGICA MANTENIMIENTO ---
+        let countdownSecs = 0; let timerInterval;
+        onValue(ref(db, 'Config'), (snap) => { const config = snap.val(); const overlay = document.getElementById('maint-overlay'); if (config.mantenimiento_activo) { overlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; document.getElementById('fb-maint-tit').innerText = config.maint_titulo || "AJUSTANDO ZONAS"; let mins = parseInt(config.maint_tiempo) || 0; countdownSecs = mins * 60; clearInterval(timerInterval); timerInterval = setInterval(() => { if (countdownSecs <= 0) { document.getElementById('timer').innerText = "00:00:00"; return; } countdownSecs--; let h = Math.floor(countdownSecs / 3600); let m = Math.floor((countdownSecs % 3600) / 60); let s = countdownSecs % 60; document.getElementById('timer').innerText = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`; }, 1000); } else { overlay.style.display = 'none'; document.body.style.overflow = 'auto'; clearInterval(timerInterval); } });
+
+        // =============================================
+        // NUEVO: NOTIFICACIONES DE ARTÍCULO NUEVO
+        // =============================================
+        let notifActivadas = localStorage.getItem('sh_notif_activas') === '1';
+        let ultimoArticuloVisto = localStorage.getItem('sh_ultimo_articulo') || null;
+        let primeraCarga = true;
+
+        function actualizarBtnNotif() {
+            const btn = document.getElementById('btn-notif');
+            if (notifActivadas) {
+                btn.style.borderColor = 'rgba(0,255,127,0.5)';
+                btn.querySelector('i').style.color = 'var(--neon-green)';
+            } else {
+                btn.style.borderColor = 'rgba(0,191,255,0.4)';
+                btn.querySelector('i').style.color = 'var(--neon-blue)';
+            }
+        }
+
+        window.toggleNotificaciones = () => {
+            notifActivadas = !notifActivadas;
+            localStorage.setItem('sh_notif_activas', notifActivadas ? '1' : '0');
+            actualizarBtnNotif();
+            mostrarToast(notifActivadas ? '🔔 NOTIFICACIONES ACTIVADAS' : '🔕 NOTIFICACIONES DESACTIVADAS');
+        };
+
+        function mostrarToast(msg) {
+            const toast = document.getElementById('notif-toast');
+            document.getElementById('notif-toast-msg').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3500);
+        }
+
+        // =============================================
+        // CARGA DE CARDS + detección artículo nuevo
+        // =============================================
+        let todosLosConsejos = {}; // guardamos todos para el ranking
+
+        onValue(ref(db, 'consejos_card'), (snap) => {
+            const grid = document.getElementById('grid');
+            const data = snap.val();
+            grid.innerHTML = "";
+            if(data) {
+                todosLosConsejos = data;
+                const ids = Object.keys(data).reverse();
+
+                // --- Detectar artículo nuevo para notificación ---
+                const masReciente = ids[0];
+                if (!primeraCarga && notifActivadas && masReciente !== ultimoArticuloVisto) {
+                    const tit = data[masReciente].titulo || 'Nuevo artículo';
+                    mostrarToast('🆕 ' + tit.toUpperCase());
+                    document.getElementById('btn-notif').classList.add('activo');
+                }
+                if (primeraCarga) {
+                    ultimoArticuloVisto = masReciente;
+                    localStorage.setItem('sh_ultimo_articulo', masReciente);
+                    primeraCarga = false;
+                }
+
+                ids.forEach(id => {
+                    const i = data[id];
+                    const safeId = id;
+                    grid.innerHTML += `
+                    <div class="tip-card item" onclick="leerConsejo('${i.foto}', '${i.titulo}', '${i.tag || 'VIP'}', \`${i.texto}\`, '${i.video || ''}', '${safeId}', \`${i.comando || ''}\`)">
+                        <img src="${i.foto}" class="tip-img">
+                        <div class="tip-body">
+                            <h2 class="tip-title">${i.titulo}</h2>
+                            <h3 class="tip-subtitle">${i.tag || 'VIP'}</h3>
+                            <p class="tip-preview">${i.texto}</p>
+                            <div class="tip-stats-row">
+                                <div class="tip-stat-badge" id="card-vistas-${safeId}"><i class="fas fa-eye"></i> 0 vistas</div>
+                                <div class="tip-stat-badge" id="card-likes-${safeId}"><i class="fas fa-heart"></i> 0 likes</div>
+                            </div>
+                        </div>
+                    </div>`;
+
+                    onValue(ref(db, `consejos_stats/${safeId}/vistas`), (s) => {
+                        const el = document.getElementById(`card-vistas-${safeId}`);
+                        if(el) el.innerHTML = `<i class="fas fa-eye"></i> ${(s.val() || 0).toLocaleString()} vistas`;
+                    });
+                    onValue(ref(db, `consejos_stats/${safeId}/likes`), (s) => {
+                        const el = document.getElementById(`card-likes-${safeId}`);
+                        if(el) el.innerHTML = `<i class="fas fa-heart"></i> ${(s.val() || 0).toLocaleString()} likes`;
+                    });
+                });
+            }
+        });
+
+        // --- ARTÍCULO ACTIVO ---
+        let articuloActivo = null;
+        let articuloActivoTitulo = '';
+
+        window.leerConsejo = (img, tit, sub, texto, video, artId, comando) => {
+            articuloActivo = artId;
+            articuloActivoTitulo = tit;
+            document.getElementById('m-img').src = img;
+            document.getElementById('m-tit').innerText = tit;
+            document.getElementById('m-sub').innerText = '┃ ' + sub;
+            const vBox = document.getElementById('v-box');
+            const vPlayer = document.getElementById('v-player');
+            const mBody = document.getElementById('m-body');
+            const mBodyExtra = document.getElementById('m-body-extra');
+            const lineas = texto.split('\n');
+            if(lineas.length > 4 && video !== "") {
+                const mitad = Math.floor(lineas.length / 2);
+                mBody.innerText = lineas.slice(0, mitad).join('\n');
+                mBodyExtra.innerText = lineas.slice(mitad).join('\n');
+                mBodyExtra.style.display = "block";
+            } else {
+                mBody.innerText = texto;
+                mBodyExtra.style.display = "none";
+            }
+            if(video && video !== "") {
+                let id = video.split('v=')[1] || video.split('/').pop();
+                vPlayer.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+                vBox.style.display = "block";
+            } else {
+                vPlayer.src = "";
+                vBox.style.display = "none";
+            }
+
+            // Comando copiable
+            const cmdBlock = document.getElementById('comando-block');
+            const cmdText = document.getElementById('comando-text');
+            if(comando && comando.trim() !== '') {
+                cmdText.innerText = comando;
+                cmdBlock.style.display = 'block';
+                cmdText.style.userSelect = 'text';
+                cmdText.style.webkitUserSelect = 'text';
+            } else {
+                cmdBlock.style.display = 'none';
+            }
+            document.getElementById('btn-copy').classList.remove('copied');
+            document.getElementById('btn-copy').innerHTML = '<i class="fas fa-copy"></i> COPIAR';
+
+            // Resetear botón compartir
+            const btnShare = document.getElementById('btn-share-modal');
+            btnShare.classList.remove('shared');
+            btnShare.innerHTML = '<i class="fas fa-share-alt"></i> COMPARTIR';
+
+            // Registrar vista única
+            const vistaKey = `sh_vista_${artId}`;
+            if(!localStorage.getItem(vistaKey)) {
+                runTransaction(ref(db, `consejos_stats/${artId}/vistas`), (c) => (c || 0) + 1);
+                localStorage.setItem(vistaKey, '1');
+            }
+
+            // Cargar stats en modal
+            onValue(ref(db, `consejos_stats/${artId}/vistas`), (s) => {
+                document.getElementById('modal-vistas').innerText = (s.val() || 0).toLocaleString();
+            });
+            onValue(ref(db, `consejos_stats/${artId}/likes`), (s) => {
+                document.getElementById('modal-likes').innerText = (s.val() || 0).toLocaleString();
+            });
+
+            // Verificar si ya dio like
+            const likeKey = `sh_like_${artId}`;
+            const btnLike = document.getElementById('btn-like-modal');
+            if(localStorage.getItem(likeKey)) {
+                btnLike.classList.add('liked');
+                btnLike.innerHTML = '<i class="fas fa-heart"></i> TE GUSTÓ';
+            } else {
+                btnLike.classList.remove('liked');
+                btnLike.innerHTML = '<i class="fas fa-heart"></i> ME GUSTA';
+            }
+
+            const modal = document.getElementById('modal-tip');
+            modal.style.display = "flex";
+            setTimeout(() => { modal.classList.add('active'); }, 10);
+            document.body.style.overflow = "hidden";
+
+            // NUEVO: marcar notif como leída
+            document.getElementById('btn-notif').classList.remove('activo');
+            ultimoArticuloVisto = artId;
+            localStorage.setItem('sh_ultimo_articulo', artId);
+        };
+
+        window.cerrar = () => {
+            const modal = document.getElementById('modal-tip');
+            document.getElementById('v-player').src = "";
+            modal.classList.remove('active');
+            setTimeout(() => { modal.style.display = "none"; }, 300);
+            document.body.style.overflow = "auto";
+            articuloActivo = null;
+            articuloActivoTitulo = '';
+        };
+
+        // Toggle like
+        window.toggleLike = () => {
+            if(!articuloActivo) return;
+            const likeKey = `sh_like_${articuloActivo}`;
+            const btnLike = document.getElementById('btn-like-modal');
+            const likeRef = ref(db, `consejos_stats/${articuloActivo}/likes`);
+            if(localStorage.getItem(likeKey)) {
+                runTransaction(likeRef, (c) => Math.max((c || 0) - 1, 0));
+                localStorage.removeItem(likeKey);
+                btnLike.classList.remove('liked');
+                btnLike.innerHTML = '<i class="fas fa-heart"></i> ME GUSTA';
+            } else {
+                runTransaction(likeRef, (c) => (c || 0) + 1);
+                localStorage.setItem(likeKey, '1');
+                btnLike.classList.add('liked');
+                btnLike.innerHTML = '<i class="fas fa-heart"></i> TE GUSTÓ';
+            }
+        };
+
+        // Copiar comando
+        window.copiarComando = () => {
+            const txt = document.getElementById('comando-text').innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                const btn = document.getElementById('btn-copy');
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i> ¡COPIADO!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<i class="fas fa-copy"></i> COPIAR';
+                }, 2500);
+            });
+        };
+
+        // =============================================
+        // NUEVO: COMPARTIR ARTÍCULO POR LINK
+        // Genera URL con ?art=ID que al cargar abre el artículo
+        // =============================================
+        window.compartirArticulo = () => {
+            if(!articuloActivo) return;
+            const url = `${window.location.origin}${window.location.pathname}?art=${articuloActivo}`;
+            const btnShare = document.getElementById('btn-share-modal');
+
+            if (navigator.share) {
+                // Compartir nativo (móvil)
+                navigator.share({
+                    title: 'SAMUEL HACK · ' + articuloActivoTitulo,
+                    text: '👀 Mira este artículo en Samuel Hack:',
+                    url: url
+                }).catch(() => {});
+            } else {
+                // Copiar al portapapeles en desktop
+                navigator.clipboard.writeText(url).then(() => {
+                    btnShare.classList.add('shared');
+                    btnShare.innerHTML = '<i class="fas fa-check"></i> ¡LINK COPIADO!';
+                    setTimeout(() => {
+                        btnShare.classList.remove('shared');
+                        btnShare.innerHTML = '<i class="fas fa-share-alt"></i> COMPARTIR';
+                    }, 2500);
+                });
+            }
+        };
+
+        // Abrir artículo directo si viene con ?art=ID en la URL
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            const artParam = params.get('art');
+            if(artParam) {
+                // Esperar a que carguen las cards y abrir ese artículo
+                const intentar = setInterval(() => {
+                    const data = todosLosConsejos;
+                    if(data && data[artParam]) {
+                        const i = data[artParam];
+                        leerConsejo(i.foto, i.titulo, i.tag || 'VIP', i.texto, i.video || '', artParam, i.comando || '');
+                        clearInterval(intentar);
+                    }
+                }, 300);
+                setTimeout(() => clearInterval(intentar), 8000); // timeout 8s
+            }
+        });
+
+        // =============================================
+        // NUEVO: RANKING (nodo Firebase: consejos_ranking)
+        // Lee consejos_stats y los ordena para mostrar ranking
+        // =============================================
+        let rankingTabActual = 'vistas';
+
+        window.abrirRanking = () => {
+            document.getElementById('modal-ranking').style.display = 'flex';
+            setTimeout(() => document.getElementById('modal-ranking').classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+            cargarRanking(rankingTabActual);
+        };
+
+        window.cerrarRanking = () => {
+            const m = document.getElementById('modal-ranking');
+            m.classList.remove('active');
+            setTimeout(() => { m.style.display = 'none'; }, 300);
+            document.body.style.overflow = 'auto';
+        };
+
+        window.cambiarTabRanking = (tipo, el) => {
+            rankingTabActual = tipo;
+            document.querySelectorAll('.ranking-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            cargarRanking(tipo);
+        };
+
+        function cargarRanking(tipo) {
+            const lista = document.getElementById('ranking-list');
+            lista.innerHTML = '<div class="ranking-empty">CARGANDO...</div>';
+
+            // Lee stats de todos los artículos y los ordena
+            get(ref(db, 'consejos_stats')).then(statsSnap => {
+                const stats = statsSnap.val() || {};
+                const data = todosLosConsejos;
+                if(!data || Object.keys(data).length === 0) {
+                    lista.innerHTML = '<div class="ranking-empty">SIN DATOS AÚN</div>';
+                    return;
+                }
+
+                // Construir array ordenado
+                const arr = Object.keys(data).map(id => ({
+                    id,
+                    titulo: data[id].titulo || '---',
+                    tag: data[id].tag || 'VIP',
+                    foto: data[id].foto || '',
+                    vistas: (stats[id] && stats[id].vistas) || 0,
+                    likes: (stats[id] && stats[id].likes) || 0,
+                }));
+
+                arr.sort((a, b) => b[tipo] - a[tipo]);
+
+                // Guardar en Firebase nodo consejos_ranking para acceso externo
+                const rankingData = {};
+                arr.slice(0, 10).forEach((item, idx) => {
+                    rankingData[`pos_${idx + 1}`] = {
+                        posicion: idx + 1,
+                        id: item.id,
+                        titulo: item.titulo,
+                        tag: item.tag,
+                        vistas: item.vistas,
+                        likes: item.likes
+                    };
+                });
+                set(ref(db, `consejos_ranking/${tipo}`), rankingData);
+
+                // Renderizar
+                if(arr.length === 0) {
+                    lista.innerHTML = '<div class="ranking-empty">SIN ARTÍCULOS</div>';
+                    return;
+                }
+
+                lista.innerHTML = arr.slice(0, 10).map((item, idx) => {
+                    const pos = idx + 1;
+                    const posClass = pos === 1 ? 'gold' : pos === 2 ? 'silver' : pos === 3 ? 'bronze' : 'other';
+                    const valor = tipo === 'vistas' ? item.vistas.toLocaleString() + ' 👁' : item.likes.toLocaleString() + ' ❤️';
+                    return `
+                    <div class="ranking-item" onclick="cerrarRanking(); leerConsejo('${item.foto}','${item.titulo}','${item.tag}',\`${(data[item.id].texto||'').replace(/`/g,"'")}\`,'${data[item.id].video||''}','${item.id}',\`${(data[item.id].comando||'').replace(/`/g,"'")}\`)">
+                        <div class="ranking-pos ${posClass}">${pos}</div>
+                        <img class="ranking-img" src="${item.foto}" onerror="this.style.display='none'">
+                        <div class="ranking-info">
+                            <div class="ranking-name">${item.titulo}</div>
+                            <div class="ranking-tag">${item.tag}</div>
+                        </div>
+                        <div class="ranking-val">${valor}</div>
+                    </div>`;
+                }).join('');
+            });
+        }
+
+        // Sugerencias
+        window.abrirSugerencia = () => { document.getElementById('modal-sugerencia').classList.add('active'); };
+        window.cerrarSugerencia = () => { document.getElementById('modal-sugerencia').classList.remove('active'); document.getElementById('sug-nombre').value = ''; document.getElementById('sug-idea').value = ''; };
+        window.enviarSugerencia = () => {
+            const nombre = document.getElementById('sug-nombre').value.trim();
+            const idea = document.getElementById('sug-idea').value.trim();
+            if(!nombre || !idea) return alert('Completa todos los campos.');
+            const sugRef = push(ref(db, 'Sugerencias_Consejos'));
+            set(sugRef, { nombre, idea, fecha: new Date().toLocaleString() }).then(() => {
+                alert('¡Sugerencia enviada! Gracias 💡');
+                cerrarSugerencia();
+            });
+        };
+
+        // Modal bienvenida consejos
+        window.cerrarWelcomeCons = () => {
+            const m = document.getElementById('modal-welcome-cons');
+            m.style.opacity = '0'; m.style.transition = 'opacity 0.3s';
+            setTimeout(() => { m.classList.remove('visible'); m.style.opacity = ''; m.style.transition = ''; }, 300);
+        };
+        onValue(ref(db, 'Config_Welcome_Consejos'), (snap) => {
+            const d = snap.val(); if(!d) return;
+            if(d.titulo) document.getElementById('wc-titulo').innerText = d.titulo;
+            if(d.texto) document.getElementById('wc-texto').innerText = d.texto;
+            if(d.video_url && d.video_url.trim() !== '') {
+                const yt = d.video_url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+                const url = yt ? `https://www.youtube.com/embed/${yt[1]}` : d.video_url;
+                const ifr = document.getElementById('wc-iframe');
+                ifr.src = url; ifr.style.display = 'block';
+                document.getElementById('wc-placeholder').style.display = 'none';
+            }
+        });
+        // Mostrar modal bienvenida al cargar
+        window.addEventListener('load', () => {
+            document.getElementById('modal-welcome-cons').classList.add('visible');
+            actualizarBtnNotif();
+        });
+
+        window.db = db; window.push = push; window.set = set; window.ref = ref; window.onValue = onValue; window.runTransaction = runTransaction; window.get = get;
+
+</script> <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <script> particlesJS("particles-js", { "particles": { "number": { "value": 80 }, "color": { "value": ["#00ff7f", "#00bfff"] }, "shape": { "type": "circle" }, "opacity": { "value": 0.2 }, "size": { "value": 2 }, "line_linked": { "enable": true, "distance": 120, "color": "#00ff7f", "opacity": 0.1 }, "move": { "enable": true, "speed": 1.5 } } }); function filtrar() { let v = document.getElementById('bus').value.toUpperCase(); let items = document.getElementsByClassName('item'); for(let i=0; i<items.length; i++) { items[i].style.display = items[i].innerText.toUpperCase().includes(v) ? "" : "none"; } } </script> </body> </html>
